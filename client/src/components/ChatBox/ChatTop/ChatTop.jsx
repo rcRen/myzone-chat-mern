@@ -2,8 +2,11 @@ import React from "react";
 import avatar from "../../../assets/avatars/avatar1.jpg";
 import Typography from "../../UI/data-display/Typography";
 import IconButton from "../../UI/inputs/IconButton";
+import { useSelector } from "react-redux";
 
-const ChatTop = (props) => {
+const ChatTop = ({ chat }) => {
+  const { user } = useSelector((state) => state.auth.user);
+  const member = chat?.members.find((member) => member._id !== user?._id);
   return (
     <div className="w-full bg-gray-200">
       <div className="w-full min-h-[84px] px-5 py-6">
@@ -23,7 +26,7 @@ const ChatTop = (props) => {
                 className="mb-2 default-outline cursor-pointer"
                 tabindex="0"
               >
-                Get Name
+                {member?.firstname} {member?.lastname}
               </Typography>
 
               <Typography

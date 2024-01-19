@@ -27,6 +27,7 @@ const Textarea = (props) => {
       placeholder={props.placeholder}
       cols={props.cols}
       rows={props.rows}
+      onChange={props.onChange}
     />
   );
 };

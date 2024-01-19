@@ -8,10 +8,10 @@ import {
 import auth from "../middleware/auth.js";
 const router = express.Router();
 
-router.get("/",auth, getAllUsers);
-router.get("/:userId", getUserById);
-router.get("/:userId/contacts", getAllContacts);
-router.put("/:userId/addContact", addUserContact);
+router.post("/", auth, getAllUsers);
+router.post("/contacts", auth, getAllContacts);
+router.post("/addContact", auth, addUserContact);
+router.post("/:userId", auth, getUserById);
 // router.put("/:userId", updateUserById);
 // router.put("/:userId/:contactId/delete", deleteContactUser);
 

@@ -4,12 +4,18 @@ import { getContacts } from "../../../services/user.service";
 import { useSelector } from "react-redux";
 
 const ContactList = (props) => {
-  const  user  = useSelector((state) => state.auth.authData);
   const [contactList, setContactList] = useState([]);
-  console.log(contactList);
-
+  const { user } = useSelector((state) => state.auth.user);
+  const fetchContacts = async () => {
+    try {
+      const { contacts } = await getContacts(user?._id);
+      setContactList(contacts);
+    } catch (error) {
+      console.info("error:", error);
+    }
+  };
   useEffect(() => {
-  // getContacts(user?._id).then((data) => );
+    fetchContacts();
   }, []);
   return (
     <div
@@ -17,7 +23,11 @@ const ContactList = (props) => {
       style={{ overflowX: "visible", overflowY: "scroll" }}
     >
       {contactList.map((person) => (
-        <Contact key={person._id} />
+        <Contact
+          key={person._id}
+          firstname={person.firstname}
+          lastname={person.lastname}
+        />
       ))}
     </div>
   );

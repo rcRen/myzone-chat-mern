@@ -1,28 +1,41 @@
-const API_URL = "http://localhost:3001/api/user";
+import authHeader from "./auth-header";
 
+const API_URL = "http://localhost:3001/api/user";
+const user = JSON.parse(localStorage.getItem("user"));
 export const getAllUsers = async () => {
   return fetch(`${API_URL}`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "post",
+    headers: authHeader(),
   }).then((res) => res.json());
 };
 
 export const getContacts = async (id) => {
-  return fetch(`${API_URL}/${id}/contacts`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  return fetch(`${API_URL}/contacts`, {
+    method: "post",
+    headers: authHeader(),
+    body: JSON.stringify({
+      userId: id,
+    }),
   }).then((res) => res.json());
 };
 
-export const getUser = async (id) => {
+export const getUserById = async (id) => {
   return fetch(`${API_URL}/${id}`, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "post",
+    headers: authHeader(),
+    body: JSON.stringify({
+      userId: user?._id,
+    }),
+  }).then((res) => res.json());
+};
+
+export const addContact = async (userId, contactId) => {
+  return fetch(`${API_URL}/addContact`, {
+    method: "post",
+    headers: authHeader(),
+    body: JSON.stringify({
+      userId,
+      contactId,
+    }),
   }).then((res) => res.json());
 };

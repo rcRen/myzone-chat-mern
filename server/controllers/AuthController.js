@@ -37,7 +37,7 @@ export const loginUser = async (req, res) => {
             email: user.email,
             id: user._id,
           },
-          process.env.JWTKEY,
+          process.env.JWTKEY
           // { expiresIn: "24h" }
         );
         const { password, ...otherInfo } = user._doc;

@@ -16,7 +16,7 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   const id = req.params.userId;
   try {
-    const user = await UserModel.findById(id).contacts;
+    const user = await UserModel.findById(id);
     if (user) {
       const { password, ...otherInfo } = user._doc;
       res.status(200).json({ user: otherInfo });
@@ -29,9 +29,9 @@ export const getUserById = async (req, res) => {
 };
 
 export const getAllContacts = async (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   try {
-    const user = await UserModel.findById(id);
+    const user = await UserModel.findById(id).populate("contacts");
     const contacts = user.contacts;
     res.status(200).json({ contacts: contacts });
   } catch (error) {
@@ -40,9 +40,7 @@ export const getAllContacts = async (req, res) => {
 };
 
 export const addUserContact = async (req, res) => {
-  console.info(req.body);
-  const { userId } = req.params;
-  const { contactId } = req.body;
+  const { userId, contactId } = req.body;
   if (userId == contactId) {
     res.status(403).json();
   } else {

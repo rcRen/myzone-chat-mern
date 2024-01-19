@@ -16,7 +16,11 @@ const IconButton = (props) => {
   const variantClassess = getVariantClasses();
   const classes = `${baseClasses} ${props.className} ${variantClassess}`;
 
-  return <button className={classes}>{props.children}</button>;
+  return (
+    <button className={classes} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 
 export default IconButton;

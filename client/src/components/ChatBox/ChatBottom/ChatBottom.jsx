@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Textarea from "../../UI/inputs/Textarea";
 import IconButton from "../../UI/inputs/IconButton";
+import { sendMessage } from "../../../services/message.service";
 
-const ChatBottom = (props) => {
+const ChatBottom = ({ setSendText }) => {
+  const [typedMessage, setTypedMessage] = useState(null);
+  const handleTextChange = (event) => {
+    const inputText = event.target.value;
+    setTypedMessage(inputText);
+  };
+
+  const handleSendMessage = async () => {
+    if (typedMessage !== null) {
+      setSendText(typedMessage);
+    }
+  };
+
   return (
     <>
       <div className="w-full">
@@ -33,6 +46,8 @@ const ChatBottom = (props) => {
                 cols="30"
                 rows="1"
                 placeholder="Write your message here"
+                value={typedMessage}
+                onChange={handleTextChange}
               />
             </div>
           </div>
@@ -40,6 +55,10 @@ const ChatBottom = (props) => {
             <IconButton
               variant="ghost"
               className="group w-7 h-7 bg-indigo-300 hover:bg-indigo-400 focus:bg-indigo-400 dark:focus:bg-indigo-300 dark:bg-indigo-400 dark:hover:bg-indigo-400 active:scale-110"
+              onClick={() => {
+                setTypedMessage("");
+                handleSendMessage(typedMessage);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,20 @@
 import mongoose from "mongoose";
 const ChatSchema = new mongoose.Schema(
   {
-    members: { type: Array },
+    chatName: { type: String },
+    isGroupChat: { type: Boolean, default: false },
+    members: {
+      type: [mongoose.Types.ObjectId],
+      ref: "User",
+    },
+    groupAdmin: {
+      type: [mongoose.Types.ObjectId],
+      ref: "User",
+    },
+    lastMessage: {
+      type: mongoose.Types.ObjectId,
+      ref: "Message",
+    },
   },
   { timestamps: true }
 );

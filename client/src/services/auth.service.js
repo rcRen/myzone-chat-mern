@@ -18,9 +18,18 @@ export const login = async (formData) => {
     },
     body: JSON.stringify(formData),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((error) => {
+          throw new Error(error.message || "Login failed");
+        });
+      }
+      return res.json();
+    })
     .then((data) => {
-      localStorage.setItem("user", JSON.stringify(data));
+      if (data.token) {
+        localStorage.setItem("user", JSON.stringify(data));
+      }
       return data;
     });
 };
