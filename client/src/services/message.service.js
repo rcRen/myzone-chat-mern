@@ -11,7 +11,7 @@ export const getMessages = async (chatId) => {
 };
 
 
-export const sendMessage = async (chatId, senderId, text) => {
+export const sendMessage = async (chatId, senderId, receiverId, text) => {
   if (text && text !== "") {
     return fetch(`${API_URL}`, {
       method: "post",
@@ -22,6 +22,7 @@ export const sendMessage = async (chatId, senderId, text) => {
       body: JSON.stringify({
         chatId,
         senderId,
+        receiverId,
         text
       })
     }).then(res => res.json())

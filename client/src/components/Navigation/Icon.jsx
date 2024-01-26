@@ -3,6 +3,7 @@ import {
   ChatBubbleOvalLeftIcon,
   UsersIcon,
   EllipsisVerticalIcon,
+  ArrowLeftStartOnRectangleIcon
 } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 
@@ -29,6 +30,10 @@ const Icon = (props) => {
     case "ellipsis":
       return (
         <EllipsisVerticalIcon className="h-6 w-6 text-black opacity-60 dark:text-white dark:opacity-70 hover:scale-105 cursor-pointer" />
+      );
+    case "logout":
+      return (
+        <ArrowLeftStartOnRectangleIcon className="w-7 h-7 text-gray-300 group-focus:text-indigo-400 hover:text-indigo-400 active:text-indigo-400 active:scale-110 dark:text-gray-500 transition ease-out duration-200" />
       );
   }
 };

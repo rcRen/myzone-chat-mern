@@ -4,8 +4,9 @@ import MessageModel from "../models/MessageModel.js";
 export const getMessages = async (req, res) => {
   const { chatId } = req.params;
   try {
-    const result = await MessageModel.find({ chat:chatId })
+    const result = await MessageModel.find({ chat: chatId })
       .populate('sender')
+      .populate('receiver')
       .populate("chat");
     res.status(200).json(result);
   } catch (error) {
@@ -15,25 +16,23 @@ export const getMessages = async (req, res) => {
 
 
 export const addMessage = async (req, res) => {
-  const { chatId, senderId, text } = req.body;
-  if (!chatId || !senderId || !text) {
+  const { chatId, senderId, receiverId, text } = req.body;
+  if (!chatId || !senderId || !text || !receiverId) {
     console.log("Invalid data passed into request");
     return res.sendStatus(400);
   }
   let newMessage = {
     chat: chatId,
     sender: senderId,
+    receiver: receiverId,
     text: text,
   };
 
   try {
     let message = await MessageModel.create(newMessage);
+    message = await message.populate("chat", "_id")
     message = await message.populate('sender')
-    message = await message.populate({
-      path: "chat",
-      model: "Chat",
-      populate: { path: "members", model: "User" }
-    })
+    message = await message.populate("receiver")
 
     await ChatModel.findByIdAndUpdate(chatId, { lastMessage: message })
 

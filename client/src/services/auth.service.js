@@ -35,7 +35,7 @@ export const login = async (formData) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.clear();
 };
 
 const authService = { register, login, logout };

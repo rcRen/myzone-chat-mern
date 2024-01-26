@@ -8,7 +8,6 @@ import { removeNotification } from "../../../slices/notificationSlice";
 const ChatList = (props) => {
   const [chats, setChats] = useState([]);
   const { user } = useSelector((state) => state.auth.user);
-  const notification = useSelector((state) => state.notification);
   const dispatch = useDispatch();
   const fetchChats = async () => {
     try {
@@ -29,9 +28,9 @@ const ChatList = (props) => {
   }, []);
   return (
     <>
-      {chats?.map((chat) => (
-        <div onClick={() => handleClick(chat)}>
-          <Chat key={chat._id} chat={chat} currentUser={user?._id} />
+      {chats?.map((chat, index) => (
+        <div key={index} onClick={() => handleClick(chat)}>
+          <Chat key={chat._id} chat={chat} />
         </div>
       ))}
     </>

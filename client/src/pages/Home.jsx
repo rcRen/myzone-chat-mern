@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ChatBox from "../components/ChatBox/ChatBox";
 import Navigation from "../components/Navigation/Navigation";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 const Home = () => {
   const height = `${window.innerHeight}px`;
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { chat } = useSelector((state) => state.active);
 
   return !isLoggedIn ? (
     <Navigate to="/auth/sign-in" />

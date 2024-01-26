@@ -1,17 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Textarea from "../../UI/inputs/Textarea";
 import IconButton from "../../UI/inputs/IconButton";
 import { sendMessage } from "../../../services/message.service";
 
 const ChatBottom = ({ setSendText }) => {
-  const [typedMessage, setTypedMessage] = useState(null);
+  const [typedMessage, setTypedMessage] = useState("");
   const handleTextChange = (event) => {
     const inputText = event.target.value;
     setTypedMessage(inputText);
   };
 
   const handleSendMessage = async () => {
-    if (typedMessage !== null) {
+    if (typedMessage !== null || typedMessage !== "") {
       setSendText(typedMessage);
     }
   };

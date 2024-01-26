@@ -7,11 +7,11 @@ const notificationSlice = createSlice({
     initialState,
     reducers: {
         setNotifications: (state, action) => {
+            console.info('...')
             return { messages: [action.payload, ...state.messages] };
         }
         ,
         removeNotification: (state, action) => {
-            console.info('111', action.payload)
             const restNotification = state.messages.filter(message => message.chat._id !== action.payload._id)
             return { messages: restNotification };
 

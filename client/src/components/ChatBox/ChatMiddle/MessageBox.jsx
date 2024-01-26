@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import avatar1 from "../../../assets/avatars/avatar1.jpg";
 import avatar2 from "../../../assets/avatars/avatar2.png";
 import Typography from "../../UI/data-display/Typography";
 import { formatTimestamp } from "../../../utils";
 import { useSelector } from "react-redux";
+import Loading from "../../UI/data-display/Loading";
 
 const MessageBox = (props) => {
   const { message } = props;
   const senderId = message?.sender._id;
   const { user } = useSelector((state) => state.auth.user);
+  const [loading, setLoading] = useState(true);
   const scrollRef = useRef();
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -39,7 +41,7 @@ const MessageBox = (props) => {
           {/* --date-- */}
           <div className="ml-4 order-1">
             <Typography variant="body-1" className="whitespace-pre">
-              {formatTimestamp(message?.createdAt)}
+              {formatTimestamp(message?.createdAt || "")}
             </Typography>
           </div>
         </div>
@@ -81,9 +83,12 @@ const MessageBox = (props) => {
     </div>
   );
 
-  if (senderId !== user?._id) {
-    return leftSideMessageBar;
+  if (!message) {
+    return <Loading />;
   }
-  return rightSideMessageBar;
+  if (senderId !== user?._id) {
+    return message && leftSideMessageBar;
+  }
+  return message && rightSideMessageBar;
 };
 export default MessageBox;

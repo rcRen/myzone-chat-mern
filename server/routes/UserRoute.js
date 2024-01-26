@@ -8,7 +8,7 @@ import {
 import auth from "../middleware/auth.js";
 const router = express.Router();
 
-router.post("/", auth, getAllUsers);
+router.post("/",getAllUsers);
 router.post("/contacts", auth, getAllContacts);
 router.post("/addContact", auth, addUserContact);
 router.post("/:userId", auth, getUserById);

@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import avatar1 from "../../../assets/avatars/avatar1.jpg";
 import avatar2 from "../../../assets/avatars/avatar2.png";
 import Typography from "../../UI/data-display/Typography";
 import { formatTimestamp } from "../../../utils";
-const Chat = ({ chat, currentUser }) => {
-  const member = chat?.members.find((member) => member._id !== currentUser);
+import { socket } from "../../../services/socket";
+import { setNotifications } from "../../../slices/notificationSlice";
+const Chat = ({ chat }) => {
+  const { user } = useSelector((state) => state.auth.user);
+  const currentChat = useSelector((state) => state.active.chat);
+  const member = chat?.members.find((member) => member._id !== user._id);
   const notification = useSelector((state) => state.notification);
   const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.info('00', notification.messages)
     if (notification.messages.length > 0) {
       notification.messages.forEach((message) => {
-        message.chat._id === chat._id && setCount(count + 1);
+        message.sender._id == member._id && setCount(count + 1);
       });
     }
+    return () => setCount(0);
   }, [notification]);
+
+  useEffect(() => {
+    socket.on("receive-message", (message) => {
+      if (!currentChat || message.chat._id !== currentChat._id) {
+        dispatch(setNotifications(message));
+      }
+    });
+  }, [currentChat]);
 
   return (
     chat && (
@@ -52,7 +65,7 @@ const Chat = ({ chat, currentUser }) => {
                 >
                   {" "}
                   <span className="text-indigo-400">
-                    {chat.lastMessage.text}
+                    {chat.lastMessage?.text}
                   </span>
                 </Typography>
               </div>

@@ -1,12 +1,12 @@
 import React from "react";
 
-const IconButton = (props) => {
+const IconButton = ({ variant, className, children, ...rest }) => {
   const baseClasses = `group flex justify-center items-center
     outline-none rounded-full focus:outline-none transition-all
     duration-200`;
 
   const getVariantClasses = () => {
-    if (props.variant === "ghost") {
+    if (variant === "ghost") {
       return "";
     } else {
       return "focus:bg-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700 dark:focus:bg-gray-600";
@@ -14,11 +14,11 @@ const IconButton = (props) => {
   };
 
   const variantClassess = getVariantClasses();
-  const classes = `${baseClasses} ${props.className} ${variantClassess}`;
+  const classes = `${baseClasses} ${className} ${variantClassess}`;
 
   return (
-    <button className={classes} onClick={props.onClick}>
-      {props.children}
+    <button className={classes} {...rest}>
+      {children}
     </button>
   );
 };
