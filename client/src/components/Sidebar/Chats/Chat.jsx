@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar1 from "../../../assets/avatars/avatar1.jpg";
 import avatar2 from "../../../assets/avatars/avatar2.png";
@@ -8,7 +8,8 @@ import { socket } from "../../../services/socket";
 import { setNotifications } from "../../../slices/notificationSlice";
 const Chat = ({ chat }) => {
   const { user } = useSelector((state) => state.auth.user);
-  const currentChat = useSelector((state) => state.active.chat);
+  const _chat = useSelector((state) => state.active.chat);
+  const chatRef = useRef();
   const member = chat?.members.find((member) => member._id !== user._id);
   const notification = useSelector((state) => state.notification);
   const [count, setCount] = useState(0);
@@ -23,12 +24,18 @@ const Chat = ({ chat }) => {
   }, [notification]);
 
   useEffect(() => {
+    chatRef.current = _chat;
     socket.on("receive-message", (message) => {
-      if (!currentChat || message.chat._id !== currentChat._id) {
+      let currentChat = chatRef.current;
+      if (currentChat == null) {
+        dispatch(setNotifications(message));
+        return;
+      }
+      if (currentChat._id !== message.chat._id) {
         dispatch(setNotifications(message));
       }
     });
-  }, [currentChat]);
+  }, [_chat]);
 
   return (
     chat && (

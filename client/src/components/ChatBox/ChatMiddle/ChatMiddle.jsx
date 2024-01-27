@@ -20,7 +20,6 @@ const ChatMiddle = ({ chat, receivedMessage, sendMessage }) => {
   }, [receivedMessage]);
 
   useEffect(() => {
-    console.info("6", sendMessage);
     if (sendMessage !== null) {
       setMessages([...messages, sendMessage]);
     }

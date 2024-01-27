@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { Server } from "socket.io";
 
 //routes
 import ChatRoute from "./routes/ChatRoute.js";
@@ -28,11 +29,34 @@ mongoose
   .connect(CONNECTION)
   .then(() => {
     console.log("App connected to database.");
-    app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
   })
   .catch((error) => console.log(`connection error: ${error}`));
+
+const server = app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
 
 app.use("/api/chat", ChatRoute);
 app.use("/api/message", MessageRoute);
 app.use("/api/auth", AuthRoute);
 app.use("/api/user", UserRoute);
+
+// -------socket.io-------
+const io = new Server(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000"
+  },
+  path: "/socket/chat"
+});
+
+io.on('connection', (socket) => {
+  console.info('socket is connected:', socket.id)
+
+  socket.on("send-message", (receivedMessage) => {
+    io.emit('receive-message', receivedMessage)
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`${socket.id} is disconnected`)
+  })
+})
+
