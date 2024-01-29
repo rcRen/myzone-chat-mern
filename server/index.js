@@ -1,4 +1,5 @@
 import express from "express";
+import path from 'path'
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -12,6 +13,10 @@ import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 
 const app = express();
+app.use(express.static(path.join(__dirname,'client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 dotenv.config();
 dotenv.config({ path: `.env.local`, override: true });
 
