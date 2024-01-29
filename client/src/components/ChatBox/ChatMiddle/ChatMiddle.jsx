@@ -30,7 +30,7 @@ const ChatMiddle = ({ chat, receivedMessage, sendMessage }) => {
       <div>
         {messages?.map((message, index) => (
           <MessageBox key={index} message={message} />
-        ))}
+        ))}  
       </div>
     </div>
   );

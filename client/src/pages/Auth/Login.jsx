@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/primary-logo.png";
@@ -6,8 +6,6 @@ import Typography from "../../components/UI/data-display/Typography";
 import TextInput from "../../components/UI/inputs/TextInput";
 import Button from "../../components/UI/inputs/Button";
 import { login } from "../../slices/authSlice";
-import { clearMessage } from "../../slices/messageSlice";
-
 
 const Login = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -19,7 +17,6 @@ const Login = (props) => {
     password: "",
   };
   const [data, setData] = useState(initialData);
-  const [Loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -27,16 +24,13 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     dispatch(login(data))
       .unwrap()
       .then(() => {
         navigate("/");
       })
       .catch((error) => {
-        console.info("22", error);
         setData(initialData);
-        setLoading(false);
       });
   };
   return isLoggedIn ? (
@@ -46,7 +40,7 @@ const Login = (props) => {
       <div className="w-full md:px-[26%] xs:px-[10%]">
         {/* --header-- */}
         <div className="mb-6 flex flex-col">
-          <img src={logo} className="w-[50px] h-[50px] mb-4 opacity-70" />
+          <img alt="logo" src={logo} className="w-[50px] h-[50px] mb-4 opacity-70" />
           <Typography variant="heading-2" className="mb-4">
             Welcome back
           </Typography>

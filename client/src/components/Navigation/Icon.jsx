@@ -15,7 +15,7 @@ const Icon = (props) => {
       return (
         <ChatBubbleOvalLeftIcon
           className={`w-7 h-7 group-focus:text-indigo-400 hover:text-indigo-400 active:text-indigo-400 active:scale-110 dark:text-gray-500 transition ease-out duration-200 ${
-            activeSidebar == "chats" ? "text-indigo-400" : "text-gray-300"
+            activeSidebar === "chats" ? "text-indigo-400" : "text-gray-300"
           } `}
         />
       );
@@ -23,7 +23,7 @@ const Icon = (props) => {
       return (
         <UsersIcon
           className={`w-7 h-7 group-focus:text-indigo-400 hover:text-indigo-400 active:text-indigo-400 active:scale-110 dark:text-gray-500 transition ease-out duration-200 ${
-            activeSidebar == "contacts" ? "text-indigo-400" : "text-gray-300"
+            activeSidebar === "contacts" ? "text-indigo-400" : "text-gray-300"
           }`}
         />
       );

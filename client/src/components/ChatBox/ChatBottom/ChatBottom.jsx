@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Textarea from "../../UI/inputs/Textarea";
 import IconButton from "../../UI/inputs/IconButton";
-import { sendMessage } from "../../../services/message.service";
 
 const ChatBottom = ({ setSendText }) => {
   const [typedMessage, setTypedMessage] = useState("");

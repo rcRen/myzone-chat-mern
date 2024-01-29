@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Typography from "../../components/UI/data-display/Typography";
-import Auth from "./Auth";
 import TextInput from "../../components/UI/inputs/TextInput";
 import Button from "../../components/UI/inputs/Button";
 import { register } from "../../slices/authSlice";

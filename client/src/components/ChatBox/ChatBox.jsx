@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ChatTop from "./ChatTop/ChatTop";
 import ChatMiddle from "./ChatMiddle/ChatMiddle";
@@ -40,8 +40,8 @@ const ChatBox = (props) => {
     socket.on("receive-message", (message) => {
       if (
         message &&
-        message.chat._id == chat?._id &&
-        message.receiver._id == user._id
+        message.chat._id === chat?._id &&
+        message.receiver._id === user._id
       ) {
         setReceivedMessage(message);
       }

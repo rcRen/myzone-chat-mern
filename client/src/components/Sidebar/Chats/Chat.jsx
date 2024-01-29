@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import avatar1 from "../../../assets/avatars/avatar1.jpg";
-import avatar2 from "../../../assets/avatars/avatar2.png";
 import Typography from "../../UI/data-display/Typography";
 import { formatTimestamp } from "../../../utils";
 import { socket } from "../../../services/socket";
@@ -17,7 +16,7 @@ const Chat = ({ chat }) => {
   useEffect(() => {
     if (notification.messages.length > 0) {
       notification.messages.forEach((message) => {
-        message.sender._id == member._id && setCount(count + 1);
+        message.sender._id === member._id && setCount(count + 1);
       });
     }
     return () => setCount(0);

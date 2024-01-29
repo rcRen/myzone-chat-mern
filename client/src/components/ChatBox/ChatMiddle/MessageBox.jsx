@@ -10,7 +10,6 @@ const MessageBox = (props) => {
   const { message } = props;
   const senderId = message?.sender._id;
   const { user } = useSelector((state) => state.auth.user);
-  const [loading, setLoading] = useState(true);
   const scrollRef = useRef();
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
