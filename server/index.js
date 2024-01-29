@@ -12,10 +12,13 @@ import MessageRoute from "./routes/MessageRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 
+
 const app = express();
-app.use(express.static(path.join(__dirname,'client/build')))
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.resolve(__dirname, 'client/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });
 dotenv.config();
 dotenv.config({ path: `.env.local`, override: true });
