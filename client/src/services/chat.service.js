@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/chat";
+const API_URL = `${process.env.API_URL}/chat`;
 
 export const createChat = async (data) => {
   return fetch(`${API_URL}`, {

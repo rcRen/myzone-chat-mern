@@ -3,9 +3,9 @@ import { io } from "socket.io-client"
 let socket;
 
 if (!socket) {
-    socket = io("http://localhost:5000", {
+    socket = io(process.env.SOCKET_URL, {
         autoConnect: true,
-        path: "/socket/chat"
+        path: "/chat"
     })
 }
 

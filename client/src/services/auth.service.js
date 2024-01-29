@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = `${process.env.API_URL}/auth`;
 
 export const register = (formData) => {
   return fetch(`${API_URL}/register`, {
