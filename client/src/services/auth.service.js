@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/auth";
+const API_URL = "http://localhost:5000/api/auth";
 
 export const register = (formData) => {
   return fetch(`${API_URL}/register`, {

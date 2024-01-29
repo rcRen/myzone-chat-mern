@@ -1,6 +1,6 @@
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:3001/api/user";
+const API_URL = "http://localhost:5000/api/user";
 const user = JSON.parse(localStorage.getItem("user"));
 export const getAllUsers = async () => {
   return fetch(`${API_URL}`, {

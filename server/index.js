@@ -14,11 +14,9 @@ import UserRoute from "./routes/UserRoute.js";
 
 
 const app = express();
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
-app.use(express.static(path.resolve(__dirname, 'client/build')))
+app.use(express.static(path.resolve('../client/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.resolve('../client/build', 'index.html'));
 });
 dotenv.config();
 dotenv.config({ path: `.env.local`, override: true });
