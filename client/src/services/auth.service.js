@@ -1,4 +1,4 @@
-const API_URL = REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/auth` : '/api/auth'
+const API_URL = process.env.REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/auth` : '/api/auth'
 
 export const register = (formData) => {
   return fetch(`${API_URL}/register`, {

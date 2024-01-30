@@ -1,4 +1,4 @@
-const API_URL = REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/message` : '/api/message';
+const API_URL =  process.env.REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/message` : '/api/message';
 
 export const getMessages = async (chatId) => {
   return fetch(`${API_URL}/${chatId}`, {

@@ -1,4 +1,4 @@
-const API_URL = REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/chat` : '/api/chat'
+const API_URL =  process.env.REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/chat` : '/api/chat'
 
 
 export const createChat = async (data) => {
