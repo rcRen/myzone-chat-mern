@@ -1,9 +1,10 @@
 import { io } from "socket.io-client"
+const REACT_APP_SOCKET_URL = REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_SOCKET_URL}` : '/'
 
 let socket;
 
 if (!socket) {
-    socket = io(process.env.REACT_APP_SOCKET_URL, {
+    socket = io(REACT_APP_SOCKET_URL, {
         autoConnect: true,
         path: "socket/chat"
     })
