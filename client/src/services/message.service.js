@@ -1,4 +1,4 @@
-const API_URL = `${process.env.API_URL}/message`;
+const API_URL = `${process.env.REACT_APP_API_URL}/message`;
 
 export const getMessages = async (chatId) => {
   return fetch(`${API_URL}/${chatId}`, {

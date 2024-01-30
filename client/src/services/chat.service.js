@@ -1,4 +1,4 @@
-const API_URL = `${process.env.API_URL}/chat`;
+const API_URL = `${process.env.REACT_APP_API_URL}/chat`;
 
 export const createChat = async (data) => {
   return fetch(`${API_URL}`, {

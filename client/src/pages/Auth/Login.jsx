@@ -40,7 +40,11 @@ const Login = (props) => {
       <div className="w-full md:px-[26%] xs:px-[10%]">
         {/* --header-- */}
         <div className="mb-6 flex flex-col">
-          <img alt="logo" src={logo} className="w-[50px] h-[50px] mb-4 opacity-70" />
+          <img
+            alt="logo"
+            src={logo}
+            className="w-[50px] h-[50px] mb-4 opacity-70"
+          />
           <Typography variant="heading-2" className="mb-4">
             Welcome back
           </Typography>
