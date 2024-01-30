@@ -1,6 +1,7 @@
 import authHeader from "./auth-header";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/user`;
+const API_URL = REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/user` : '/user';
+
 const user = JSON.parse(localStorage.getItem("user"));
 export const getAllUsers = async () => {
   return fetch(`${API_URL}`, {
