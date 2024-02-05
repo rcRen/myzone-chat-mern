@@ -1,9 +1,8 @@
-import logo from "../../assets/logo/primary-logo.png";
 const Logo = () => {
   return (
-    <div className="mb-9 h-7 xs:hidden md:block">
+    <div className="mb-9 h-7">
       <button className="outline-none">
-        <img alt="logo" src={logo} className="w-8" />
+        <img alt="logo" src="/primary-logo.png" className="w-8" />
       </button>
     </div>
   );

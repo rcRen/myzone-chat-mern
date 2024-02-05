@@ -1,7 +1,7 @@
-const API_URL =  process.env.REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/chat` : '/api/chat'
+const API_URL = process.env.REACT_APP_ENV === 'development' ? `${process.env.REACT_APP_API_URL}/chat` : '/api/chat'
 
 
-export const createChat = async (data) => {
+export const createChat = async ({ senderId, receiverId }) => {
   return fetch(`${API_URL}`, {
     method: "post",
     headers: {
@@ -10,8 +10,8 @@ export const createChat = async (data) => {
     },
     // headers: authHeader(),
     body: JSON.stringify({
-      senderId: data.senderId,
-      receiverId: data.receiverId,
+      senderId,
+      receiverId
     }),
   }).then((res) => res.json());
 };
@@ -31,7 +31,7 @@ export const userChats = async (id) => {
 };
 
 export const findChat = async ({ firstId, secondId }) => {
-  return fetch(`${API_URL}`, {
+  return fetch(`${API_URL}/find`, {
     method: "post",
     headers: {
       'Accept': 'application/json',

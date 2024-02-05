@@ -18,11 +18,10 @@ export const login = async (formData) => {
     },
     body: JSON.stringify(formData),
   })
-    .then((res) => {
+    .then(async (res) => {
       if (!res.ok) {
-        return res.json().then((error) => {
-          throw new Error(error.message || "Login failed");
-        });
+        const error = await res.json();
+        throw new Error(error.message || "Login failed");
       }
       return res.json();
     })

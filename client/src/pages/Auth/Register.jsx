@@ -7,22 +7,44 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 const Register = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const avatarList = [
+    { name: "avatar1", src: "/avatars/avatar1.png" },
+    { name: "avatar2", src: "/avatars/avatar2.png" },
+    { name: "avatar3", src: "/avatars/avatar3.png" },
+    { name: "avatar4", src: "/avatars/avatar4.png" },
+    { name: "avatar5", src: "/avatars/avatar5.png" },
+    { name: "avatar6", src: "/avatars/avatar6.png" },
+  ];
+
   const initialData = {
     email: "",
     firstname: "",
     lastname: "",
-    username: "",
+    avatar: "",
     password: "",
     confirmPwd: "",
   };
   const [data, setData] = useState(initialData);
+  const [avatar, setAvatar] = useState(avatarList[0]);
   const [message, setMessage] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === "avatar") {
+      setAvatar(avatarList[e.target.selectedIndex]);
+      console.info(e.target[e.target.selectedIndex].value);
+      setData({
+        ...data,
+        [e.target.name]: e.target[e.target.selectedIndex].value,
+      });
+    } else {
+      setData({ ...data, [e.target.name]: e.target.value });
+    }
   };
   const handleSubmit = (e) => {
+    console.info(data);
     e.preventDefault();
     if (data.password === data.confirmPwd) {
       dispatch(register(data))
@@ -55,13 +77,6 @@ const Register = (props) => {
               onChange={handleChange}
             />
             <TextInput
-              label="Username"
-              placeholder="Enter a specail username"
-              className="mb-5"
-              name="username"
-              onChange={handleChange}
-            />
-            <TextInput
               label="First Name"
               placeholder="Enter your first name"
               className="mb-5"
@@ -75,6 +90,46 @@ const Register = (props) => {
               name="lastname"
               onChange={handleChange}
             />
+            <div className="mb-5 w-full flex">
+              <div className="grid relative gap-1 w-1/2">
+                <span className="mb-3 w-13 text-sm text-black opacity-60 font-semibold leading-4 tracking-[0.16px]">
+                  Choose an avatar
+                </span>
+                <select
+                  name="avatar"
+                  className="appearance-none w-full row-start-2 col-start-1 p-4 h-9 rounded-sm text-opacity-70 bg-gray-50"
+                  value={avatar?.src}
+                  onChange={handleChange}
+                >
+                  {avatarList.map((avatar, index) => (
+                    <option
+                      key={index}
+                      className="bg-white opacity-70"
+                      value={avatar.src}
+                    >
+                      {avatar.name}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-gray-400 pointer-events-none row-start-2 col-start-1 absolute right-5 top-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </div>
+              <div className="w-1/2">
+                <img src={avatar?.src} className="w-13 h-13" />
+              </div>
+            </div>
             <TextInput
               label="Password"
               className="pr-[40px] mb-5"

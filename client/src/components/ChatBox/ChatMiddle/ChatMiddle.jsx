@@ -26,7 +26,7 @@ const ChatMiddle = ({ chat, receivedMessage, sendMessage }) => {
   }, [sendMessage]);
 
   return (
-    <div className="grow px-5 py-5 flex flex-col overflow-y-scroll scrollbar-hidden">
+    <div className="grow px-5 py-10 flex flex-col h-full">
       <div>
         {messages?.map((message, index) => (
           <MessageBox key={index} message={message} />

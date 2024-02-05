@@ -12,15 +12,18 @@ const ChatBox = (props) => {
 
   const [message, setMessage] = useState();
   const [sendText, setSendText] = useState(null);
+  const [isSending, setIsSending] = useState(false);
   const [receivedMessage, setReceivedMessage] = useState(null);
-
+  
   const sendNewMessage = async () => {
+    setIsSending(true);
     try {
       const receiver = chat.members.find((member) => member._id !== user._id);
       await sendMessage(chat?._id, user?._id, receiver._id, sendText).then(
         (data) => {
           setMessage(data);
           socket.emit("send-message", data);
+          setIsSending(false);
         }
       );
     } catch (error) {
@@ -49,14 +52,14 @@ const ChatBox = (props) => {
   }, [chat]);
 
   return chat !== null ? (
-    <div className="h-full flex flex-col scrollbar-hidden">
+    <div className="w-full h-full flex flex-col relative">
       <ChatTop chat={chat} />
       <ChatMiddle
         chat={chat}
         receivedMessage={receivedMessage}
         sendMessage={message}
       />
-      <ChatBottom chat={chat} setSendText={setSendText} />
+      <ChatBottom chat={chat} setSendText={setSendText} isSending={isSending} />
     </div>
   ) : (
     <div className="w-full bg-gray-200">

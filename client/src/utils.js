@@ -18,11 +18,10 @@ export const formatTimestamp = (timestamp) => {
   } else {
     // If the timestamp is 24 hours or more ago, return the formatted date
     const options = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      month: "short",
+      day: "numeric",
       hour12: false,
     };
     return targetDate.toLocaleDateString([], options);

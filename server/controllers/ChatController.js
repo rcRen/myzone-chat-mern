@@ -37,7 +37,8 @@ export const findChat = async (req, res) => {
   try {
     const chat = await ChatModel.findOne({
       members: { $all: [firstId, secondId] },
-    });
+    }).populate("members", "-password")
+      .populate("lastMessage");
     res.status(200).json(chat);
   } catch (error) {
     res.status(500).json(error);

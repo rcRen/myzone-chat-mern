@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import avatar1 from "../../../assets/avatars/avatar1.jpg";
 import Typography from "../../UI/data-display/Typography";
 import { formatTimestamp } from "../../../utils";
 import { socket } from "../../../services/socket";
@@ -39,12 +38,16 @@ const Chat = ({ chat }) => {
   return (
     chat && (
       <div className="select-none">
-        <button className="w-full h-[92px] px-5 py-6 mb-3 flex rounded focus:bg-indigo-50 dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600 hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none transition duration-500 ease-out ">
+        <button
+          className={`w-full h-[92px] mb-3 p-5 flex items-center rounded border-b border-b-indigo-50 focus:bg-indigo-50 hover:bg-indigo-50 ${
+            _chat?._id === chat?._id && "bg-indigo-100"
+          }`}
+        >
           {/* --profile image-- */}
           <div className="mr-4">
             <div
-              style={{ backgroundImage: `url(${avatar1})` }}
-              className="w-7 h-7 rounded-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${member.avatar})` }}
+              className="w-9 h-9 rounded-full bg-cover bg-center"
             ></div>
           </div>
           <div className="w-full flex flex-col">
@@ -56,7 +59,10 @@ const Chat = ({ chat }) => {
                     {member?.firstname} {member?.lastname}
                   </Typography>
                 </div>
-                <Typography variant="body-1">
+                <Typography
+                  variant="body-1"
+                  className="invisible w-0 md:visible md:w-fit"
+                >
                   {formatTimestamp(chat.updatedAt)}
                 </Typography>
               </div>

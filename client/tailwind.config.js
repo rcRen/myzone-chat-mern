@@ -41,14 +41,14 @@ module.exports = {
         full: "9999px",
       },
 
-      opacity: {
-        0: "0",
-        20: "0.20",
-        40: "0.40",
-        60: "0.63",
-        80: "0.80",
-        100: "1",
-      },
+      // opacity: {
+      //   0: "0",
+      //   20: "0.20",
+      //   40: "0.40",
+      //   60: "0.63",
+      //   80: "0.80",
+      //   100: "1",
+      // },
 
       boxShadow: {
         "shadow-sm": "0px 1px 3px 0px rgba(5,5,5,0.10)",
@@ -62,31 +62,31 @@ module.exports = {
           "0px 15px 25px 0px rgba(3,3,3,0.1), 0px 5px 10px 0px rgba(3,3,3,0.1)",
       },
       keyframes: {
-        gradient: {
-          "0%": {
-            "background-position": "0% 0%",
-          },
+        // gradient: {
+        //   "0%": {
+        //     "background-position": "0% 0%",
+        //   },
 
-          "50%": {
-            "background-position": "0% 100%",
-          },
+        //   "50%": {
+        //     "background-position": "0% 100%",
+        //   },
 
-          "100%": {
-            "background-position": "0% 0%",
-          },
-        },
+        //   "100%": {
+        //     "background-position": "0% 0%",
+        //   },
+        // },
       },
 
       animation: {
         gradient: "gradient 15s ease infinite",
       },
 
-      opacity: {
-        30: "0.30",
-        50: "0.54",
-        70: "0.70",
-        90: "0.90",
-      },
+      // opacity: {
+      //   30: "0.30",
+      //   50: "0.54",
+      //   70: "0.70",
+      //   90: "0.90",
+      // },
 
       boxShadow: {
         cxl: "0 2px 5px rgba(193, 202, 255, 0.5), 2px 0 5px rgba(193, 202, 255, 0.5), -2px 0 5px rgba(193, 202, 255, 0.5), 0 -2px 5px rgba(193, 202, 255, 0.5)",

@@ -8,7 +8,7 @@ export const registerUser = async (req, res) => {
   req.body.password = hashedPwd;
 
   const { email } = req.body.email;
-
+  console.info(req.body)
   try {
     const existUser = await UserModel.findOne({ email });
     if (existUser) {
@@ -37,8 +37,8 @@ export const loginUser = async (req, res) => {
             email: user.email,
             id: user._id,
           },
-          process.env.JWTKEY
-          // { expiresIn: "24h" }
+          process.env.JWTKEY,
+          { expiresIn: "24h" }
         );
         const { password, ...otherInfo } = user._doc;
 

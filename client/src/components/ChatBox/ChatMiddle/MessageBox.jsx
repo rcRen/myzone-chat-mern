@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import avatar1 from "../../../assets/avatars/avatar1.jpg";
-import avatar2 from "../../../assets/avatars/avatar2.png";
 import Typography from "../../UI/data-display/Typography";
 import { formatTimestamp } from "../../../utils";
 import { useSelector } from "react-redux";
@@ -16,14 +14,16 @@ const MessageBox = (props) => {
   }, []);
   const rightSideMessageBar = (
     //  /* --rightMessage message-- */
-    <div className="select-none" ref={scrollRef}>
+    <div className="select-none pb-3" ref={scrollRef}>
       <div className="xs:mb-6 md:mb-5 flex flex-row flex-row-reverse">
         {/* --avatar-- */}
         <div className="ml-4">
           <div className="outline-none">
             <div
-              style={{ backgroundImage: `url(${avatar2})` }}
-              className="w-[36px] h-[36px] bg-cover bg-center rounded-full"
+              style={{
+                backgroundImage: `url(${user.avatar})`,
+              }}
+              className="w-[35px] h-[35px] bg-cover bg-center rounded-full"
             ></div>
           </div>
         </div>
@@ -49,13 +49,13 @@ const MessageBox = (props) => {
   );
 
   const leftSideMessageBar = (
-    <div className="select-none" ref={scrollRef}>
+    <div className="select-none pb-3" ref={scrollRef}>
       <div className="xs:mb-6 md:mb-5 flex">
         {/* --avatar-- */}
         <div className="mr-4">
           <div className="outline-none">
             <div
-              style={{ backgroundImage: `url(${avatar1})` }}
+              style={{ backgroundImage: "url(/avatars/avatar2.png)" }}
               className="w-[36px] h-[36px] bg-cover bg-center rounded-full"
             ></div>
           </div>
@@ -83,7 +83,11 @@ const MessageBox = (props) => {
   );
 
   if (!message) {
-    return <Loading />;
+    return (
+      <div className="flex justify-center">
+        <Loading />
+      </div>
+    );
   }
   if (senderId !== user?._id) {
     return message && leftSideMessageBar;

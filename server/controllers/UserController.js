@@ -3,8 +3,8 @@ import UserModel from "../models/UserModel.js";
 export const getAllUsers = async (req, res) => {
   try {
     let users = await UserModel.find();
-    users.map((user) => {
-      const { password, ...otherInfo } = user._doc;
+    users = users.map((user) => {
+      const { password, contacts,...otherInfo } = user._doc;
       return otherInfo;
     });
     res.status(200).json(users);

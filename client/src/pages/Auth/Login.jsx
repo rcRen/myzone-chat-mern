@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo/primary-logo.png";
 import Typography from "../../components/UI/data-display/Typography";
 import TextInput from "../../components/UI/inputs/TextInput";
 import Button from "../../components/UI/inputs/Button";
@@ -42,7 +41,7 @@ const Login = (props) => {
         <div className="mb-6 flex flex-col">
           <img
             alt="logo"
-            src={logo}
+            src="/primary-logo.png"
             className="w-[50px] h-[50px] mb-4 opacity-70"
           />
           <Typography variant="heading-2" className="mb-4">

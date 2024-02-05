@@ -8,11 +8,13 @@ const Sidebar = (props) => {
   const activeSidebar = useSelector((state) => state.active.sidebar);
   return (
     <div
-      className={`xs:w-full md:w-[290px] h-full xs:px-5 md:p-0 flex flex-col overflow-visible transition-all duration-500 ${props.className}`}
+      className={`w-1/3 md:w-[290px] pl-5 h-screen flex flex-col static ${props.className}`}
     >
       <SidebarTitle title={activeSidebar} />
+      {activeSidebar === "contacts" && (
+        <ContactList setProfileInfo={props.setProfileInfo} />
+      )}
       {activeSidebar === "chats" && <ChatList />}
-      {activeSidebar === "contacts" && <ContactList />}
     </div>
   );
 };

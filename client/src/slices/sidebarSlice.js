@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = "chats";
+const initialState = "contacts";
 
 const sidebarSlice = createSlice({
   name: "sidebar",
