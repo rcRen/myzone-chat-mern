@@ -12,12 +12,14 @@ const ChatBottom = ({ chat, setSendText, isSending }) => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSendMessage();
+      setTypedMessage("");
     }
   };
 
   const handleSendMessage = async () => {
     if (typedMessage !== null || typedMessage !== "") {
       setSendText(typedMessage);
+      setTypedMessage("");
     }
   };
 

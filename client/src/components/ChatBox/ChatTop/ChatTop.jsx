@@ -9,7 +9,7 @@ const ChatTop = ({ chat }) => {
   const member = chat?.members.find((member) => member._id !== user?._id);
   console.info(chat);
   return (
-    <div className="w-full bg-gray-200 sticky top-0">
+    <div className="w-full bg-gray-200 sticky top-0 z-50">
       <div className="w-full min-h-[84px] px-5 py-6">
         <div className="w-full flex justify-center items-center">
           <div className="flex grow">
